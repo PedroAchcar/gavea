@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/css/index.css">
+    <link rel="shortcut icon" href="../../../static/images/download.png" type="image/x-icon">
+    <title>Carteira de Ações</title>
+</head>
+
+<body>
+    <h1>Carteira de Ações</h1>
+
+    <h2>Transações</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ticker</th>
+                <th>Preço Compra</th>
+                <th>Quantidade</th>
+                <th>Total</th>
+                <th>Posição Acionária</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transacao in transacoes %}
+            <tr>
+                <td>{{ transacao.ticker }}</td>
+                <td>{{ transacao.preco_compra }}</td>
+                <td>{{ transacao.quantidade }}</td>
+                <td>{{ transacao.total }}</td>
+                <td class="{% if transacao.posicao_atual > transacao.total %}verde{% else %}vermelho{% endif %}">
+                    {{ transacao.posicao_atual }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <h2>Total Investido</h2>
+    <p>R$ {{ total_investido }}</p>
+
+    <h2>Posição Total da Carteira</h2>
+    <p class="{% if posicao_carteira > total_investido %}verde{% else %}vermelho{% endif %}">R$ {{ posicao_carteira }}
+    </p>
+
+    <h2>Lucro/Prejuízo</h2>
+    <p>R$ {{ lucro }}</p>
+
+    <h2>Adicionar Transação</h2>
+    <form method="post" action="{% url 'adicionar_transacao' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Adicionar Transação</button>
+    </form>
+</body>
+
+</html>
