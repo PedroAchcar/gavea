@@ -23,7 +23,7 @@ Com tudo instalado e configurado, para iniciar o servidor, utilizamos a seguinte
 ```
 python manage.py migrate
 python manage.py makemigrations carteira
-python manage.p migrate
+python manage.py migrate
 python manage.py runserver
 ```
 Com isso, já temos nosso servidor funcionando. O Django utiliza por padrão a porta 8000 para aplicações (```http://127.0.0.1:8000/```). Aqui não precisamos de um Super User para acesso dos dados, pois não precisamos editá-los diretamente.
